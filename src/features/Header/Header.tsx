@@ -1,11 +1,10 @@
-import { CompanySelect } from "../CompanySelect/CompanySelect";
-import { LanguageSelect } from "../LanguageSelect/LanguageSelect";
-import Navigation from "../Navigation/Navigation";
-import Separator from "../Separator/Separator";
-import { User } from "../User/User";
-import Logo from "./Logo.svg";
-
-export default function Header() {
+import { CompanySelect } from "./components/CompanySelect/CompanySelect";
+import { LanguageSelect } from "./components/LanguageSelect/LanguageSelect";
+import Navigation from "./components/Navigation/Navigation";
+import { Separator } from "@/shared/ui/components";
+import { User } from "./components/User/User";
+import Logo from "./images/Logo.svg";
+export const Header = () => {
   return (
     <div className="h-20 flex items-center justify-between px-10 bg-white shadow-lg border-b border-neutral-100 sticky top-0">
       <div className="flex items-center gap-14 h-full">
@@ -20,4 +19,4 @@ export default function Header() {
       </div>
     </div>
   );
-}
+};

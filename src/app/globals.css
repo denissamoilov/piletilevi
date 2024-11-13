@@ -19,3 +19,11 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+h1 {
+  @apply font-montserrat text-h1;
+}
+
+.focus-outline {
+  @apply focus-visible:outline-none focus-visible:outline-primary-500/10 focus-visible:outline-offset-2;
+}

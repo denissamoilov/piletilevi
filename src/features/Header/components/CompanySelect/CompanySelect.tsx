@@ -1,6 +1,7 @@
 import React from "react";
-import { Select } from "../Select/Select";
 import cn from "classnames";
+import { Select } from "@/shared/ui/components";
+
 const companyOptions = [
   { value: "noorsooteater", label: "Noorsooteater" },
   { value: "noorsooteater1", label: "Noorsooteater" },

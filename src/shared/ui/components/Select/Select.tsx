@@ -1,14 +1,15 @@
 import React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { ChevronDown } from "../../icons/10";
+import { ChevronDown } from "../../icons";
 import { cva, VariantProps } from "class-variance-authority";
 import cn from "classnames";
 const selectStyles = cva(
-  "inline-flex items-center justify-between gap-2 focus:outline-none text-sm",
+  "focus-outline inline-flex items-center justify-between gap-2 text-sm",
   {
     variants: {
       variant: {
-        outline: "border border-primary text-primary bg-transparent gap-2",
+        outline:
+          "bg-white rounded ring-1 ring-inset ring-primary-100 text-primary bg-transparent gap-2 px-4 py-3 text-sm",
         ghost: "bg-transparent text-primary",
       },
     },
@@ -22,12 +23,14 @@ type SelectProps = VariantProps<typeof selectStyles> &
   Omit<SelectPrimitive.SelectProps, "children"> & {
     options: { value: string; label: string }[];
     className?: string;
+    placeholder?: string;
   };
 
 export const Select: React.FC<SelectProps> = ({
   variant,
   options,
   className,
+  placeholder,
   ...props
 }) => {
   return (
@@ -35,7 +38,10 @@ export const Select: React.FC<SelectProps> = ({
       <SelectPrimitive.Trigger
         className={cn(selectStyles({ variant }), className)}
       >
-        <SelectPrimitive.Value placeholder="Select an option" />
+        <SelectPrimitive.Value
+          placeholder={placeholder}
+          className="placeholder:text-text-muted"
+        />
         <SelectPrimitive.Icon className="size-2.5 text-primary-500">
           <ChevronDown />
         </SelectPrimitive.Icon>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Select } from "../Select/Select";
+import { Select } from "../../../../shared/ui/components/Select/Select";
 import cn from "classnames";
 const languageOptions = [
   { value: "en", label: "English" },

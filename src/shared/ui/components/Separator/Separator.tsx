@@ -1,6 +1,6 @@
 import React from "react";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
-import { cva, VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 
 const separatorStyles = cva("bg-primary-100 shrink-0", {
   variants: {
@@ -18,7 +18,7 @@ type SeparatorProps = {
   direction?: "horizontal" | "vertical";
 };
 
-const Separator: React.FC<SeparatorProps> = ({ direction }) => {
+export const Separator: React.FC<SeparatorProps> = ({ direction }) => {
   return (
     <SeparatorPrimitive.Root
       className={separatorStyles({ direction })}
@@ -27,5 +27,3 @@ const Separator: React.FC<SeparatorProps> = ({ direction }) => {
     />
   );
 };
-
-export default Separator;

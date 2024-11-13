@@ -3,28 +3,31 @@ import type { Config } from "tailwindcss";
 export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/shared/ui/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    textStyles: {
-      base: {
-        fontSize: "1rem", // 16px
-        lineHeight: "1.25rem", // 20px
-      },
-      sm: {
-        fontSize: "0.875rem", // 14px
-        lineHeight: "1rem", // 16px
-      },
-      h1: {
-        fontFamily: "var(--font-montserrat)",
-        fontSize: "2.25rem", // 36px
-        lineHeight: "2.875rem", // 46px
-      },
-      h2: {
-        fontSize: "1.75rem", // 28px
-        lineHeight: "2rem", // 32px
-      },
+    fontFamily: {
+      montserrat: ["var(--font-montserrat)"],
+    },
+    fontSize: {
+      base: [
+        "1rem", // 16px
+        { lineHeight: "1.25rem" }, // 20px
+      ],
+      sm: [
+        "0.875rem", // 14px
+        { lineHeight: "1rem" }, // 16px
+      ],
+      h1: [
+        "2.25rem", // 36px
+        { lineHeight: "2.875rem" }, // 46px
+      ],
+      h2: [
+        "1.75rem", // 28px
+        { lineHeight: "2rem" }, // 32px
+      ],
     },
     colors: {
       white: "#FFFFFF",
@@ -49,7 +52,12 @@ export default {
     boxShadow: {
       lg: "0 4px 20px #D6DFE5", // Add your custom shadow here
     },
-    extend: {},
+    extend: {
+      borderRadius: {
+        DEFAULT: "0.375rem", // This sets the default `rounded` class to 6px
+        sm: "0.25rem", // This sets the `rounded-sm` class to 4px
+      },
+    },
   },
   plugins: [],
 } satisfies Config;
