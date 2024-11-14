@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  DiscountsProvider,
   DiscountsFilters,
   DiscountsTable,
   DiscountsPagination,
@@ -11,7 +10,7 @@ import { Button } from "@/shared/ui/components";
 
 export default function DiscountPage() {
   return (
-    <DiscountsProvider>
+    <>
       <div className="flex flex-col gap-3">
         <div className="flex items-start justify-between">
           <h1>Discounts</h1>
@@ -31,6 +30,6 @@ export default function DiscountPage() {
       <div className="shrink-0 flex justify-center items-end mt-4">
         <DiscountsPagination />
       </div>
-    </DiscountsProvider>
+    </>
   );
 }

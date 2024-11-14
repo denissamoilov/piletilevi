@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/shared/ui/components/Table/Table";
 import { Pencil } from "@/shared/ui/icons";
+import { useDiscounts } from "../../hooks/useDiscounts";
 const invoices = [
   {
     name: "Suvesoodustus",
@@ -66,6 +67,7 @@ const invoices = [
 ];
 
 export const DiscountsTable = () => {
+  const { discounts } = useDiscounts();
   return (
     <Table>
       <TableHeader>
@@ -78,12 +80,12 @@ export const DiscountsTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.name}>
-            <TableCell>{invoice.name}</TableCell>
-            <TableCell>{invoice.appliesTo}</TableCell>
-            <TableCell>{invoice.timePeriod}</TableCell>
-            <TableCell>{invoice.discountAmount}</TableCell>
+        {discounts.map((discount) => (
+          <TableRow key={discount.id}>
+            <TableCell>{discount.name}</TableCell>
+            <TableCell>{discount.category}</TableCell>
+            <TableCell>{`${discount.startDate} - ${discount.endDate}`}</TableCell>
+            <TableCell>{discount.discountAmount}</TableCell>
             <TableCell>
               <Button
                 variant="white"
