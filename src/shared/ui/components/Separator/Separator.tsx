@@ -5,8 +5,8 @@ import { cva } from "class-variance-authority";
 const separatorStyles = cva("bg-primary-100 shrink-0", {
   variants: {
     direction: {
-      horizontal: "h-[1px] w-full",
-      vertical: "w-[1px] h-full",
+      horizontal: "h-px w-full",
+      vertical: "w-px h-full",
     },
   },
   defaultVariants: {

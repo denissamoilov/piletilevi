@@ -1,5 +1,5 @@
 import { Button, Input, Select } from "@/shared/ui/components";
-import { ChevronDown, Search } from "@/shared/ui/icons";
+import { Search } from "@/shared/ui/icons";
 
 export const DiscountsFilters = () => {
   return (

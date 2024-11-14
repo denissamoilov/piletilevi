@@ -14,7 +14,7 @@ const buttonStyles = cva(
         outline:
           "ring-2 ring-inset ring-primary-900 text-primary-900 bg-transparent hover:ring-primary-500 hover:text-primary-500",
         ghost:
-          "bg-transparent text-text-muted hover:bg-primary-light hover:bg-primary-100 hover:text-primary-900",
+          "bg-transparent text-text-muted hover:bg-primary-light hover:bg-primary-100 hover:text-primary-900 !px-3",
         "icon-only": `bg-transparent !p-0 text-text-muted`,
         white:
           "bg-white border border-primary-100 text-primary-900 hover:bg-primary-light",
