@@ -19,3 +19,4 @@ export {
   TableRow,
   TableHead,
 } from "./Table/Table";
+export { Tabs, TabsList, TabsTrigger, TabsContent } from "./Tabs/Tabs";

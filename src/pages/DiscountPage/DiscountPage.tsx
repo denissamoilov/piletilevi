@@ -5,6 +5,7 @@ import {
   DiscountsFilters,
   DiscountsTable,
   DiscountsPagination,
+  DiscountsTabs,
 } from "@/features/Discounts";
 import { Button } from "@/shared/ui/components";
 
@@ -18,6 +19,8 @@ export default function DiscountPage() {
         </div>
         <DiscountsFilters />
       </div>
+
+      <DiscountsTabs />
 
       <div className="flex-1 w-full">
         <div className="shadow-lg rounded bg-white border border-primary-50 p-5">
