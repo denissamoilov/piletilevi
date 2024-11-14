@@ -2,14 +2,15 @@ import React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { ChevronDown } from "../../icons";
 import { cva, VariantProps } from "class-variance-authority";
-import cn from "classnames";
+import { cn } from "@/shared/lib/utils";
+
 const selectStyles = cva(
   "focus-outline inline-flex items-center justify-between gap-2 text-sm",
   {
     variants: {
       variant: {
         outline:
-          "bg-white rounded ring-1 ring-inset ring-primary-100 text-primary bg-transparent gap-2 px-4 py-3 text-sm",
+          "bg-white rounded ring-1 ring-inset ring-primary-100 text-primary gap-2 px-4 py-3 text-sm",
         ghost: "bg-transparent text-primary",
       },
     },

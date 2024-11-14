@@ -1,7 +1,8 @@
 import React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, VariantProps } from "class-variance-authority";
-import cn from "classnames";
+import { cn } from "@/shared/lib/utils";
+
 const buttonStyles = cva(
   "flex px-4 items-center text-sm font-bold rounded focus-outline transition-colors",
   {

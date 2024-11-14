@@ -1,5 +1,5 @@
 import React from "react";
-import cn from "classnames";
+import { cn } from "@/shared/lib/utils";
 import { Button } from "../Button/Button";
 import { Cross } from "../../icons";
 import { type VariantProps, cva } from "class-variance-authority";

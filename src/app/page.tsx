@@ -6,8 +6,8 @@ export default function Home() {
     <div className="min-h-screen flex flex-col gap-0">
       <Header />
 
-      <div className="grow max-w-[103.75rem] w-full mx-auto px-10 pt-[1.25rem]">
-        <div className="flex flex-col gap-3">
+      <div className="flex flex-col grow max-w-[103.75rem] w-full mx-auto px-10 pt-[1.25rem] pb-20">
+        <div className="grow flex flex-col justify-between gap-5">
           <DiscountPage />
         </div>
       </div>

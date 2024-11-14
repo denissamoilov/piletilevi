@@ -1,6 +1,6 @@
 import React from "react";
 import { Select } from "../../../../shared/ui/components/Select/Select";
-import cn from "classnames";
+import { cn } from "@/shared/lib/utils";
 const languageOptions = [
   { value: "en", label: "English" },
   { value: "et", label: "Estonian" },
