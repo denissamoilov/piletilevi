@@ -11,8 +11,8 @@ interface DiscountsContextType {
   totalPages: number;
   currentPage: number;
   onPageChangeHandler: (page: number) => void;
-  searchDiscountsHandler: (search: string) => Discount[];
-  filterDiscountsHandler: (filters: string[]) => Discount[];
+  searchDiscountsHandler: (search: string) => void;
+  filterByCategoryHandler: (value: string) => void;
   filterCategories: OptionType[];
 }
 
@@ -42,6 +42,8 @@ export const DiscountsProvider = ({
   children: React.ReactNode;
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchInput, setSearchInput] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
 
   const { data: discounts = [], refetch } = useQuery<Discount[]>({
     queryFn: fetchDiscounts,
@@ -49,16 +51,29 @@ export const DiscountsProvider = ({
     initialData: [],
   });
 
+  // Filtered discounts
+  const filteredDiscounts = discounts.filter((discount) => {
+    const matchSearch = discount.name
+      .toLowerCase()
+      .includes(searchInput.toLowerCase());
+    const matchCategory =
+      discount.category.toLowerCase() === categoryFilter.toLowerCase();
+
+    console.log(
+      "discount.category.toLowerCase() ::",
+      discount.category.toLowerCase()
+    );
+    console.log("matchCategory ::", categoryFilter.toLowerCase());
+
+    return matchSearch && matchCategory;
+  });
+
   // Search
   const searchDiscountsHandler = (search: string) => {
-    const filteredDiscounts = discounts.filter((discount) =>
-      discount.name.toLowerCase().includes(search.toLowerCase())
-    );
-    console.log("filteredDiscounts ::", filteredDiscounts);
-    return filteredDiscounts;
+    setSearchInput(search);
   };
 
-  // Filter
+  // Filter categories
   const filterCategories = discounts.reduce((acc: OptionType[], discount) => {
     if (!acc.find((category) => category.value === discount.category)) {
       acc.push({ label: discount.category, value: discount.category });
@@ -66,15 +81,12 @@ export const DiscountsProvider = ({
     return acc;
   }, []);
 
-  const filterDiscountsHandler = (filters: string[]) => {
-    const filteredDiscounts = discounts.filter((discount) =>
-      filters.includes(discount.category)
-    );
-    return filteredDiscounts;
+  const filterByCategoryHandler = (category: string) => {
+    setCategoryFilter(category);
   };
 
   // Pagination
-  const slicedDiscounts = sliceDiscounts(discounts, currentPage);
+  const slicedDiscounts = sliceDiscounts(filteredDiscounts, currentPage);
 
   const totalPages = Math.ceil(discounts.length / PAGE_ITEMS);
 
@@ -101,7 +113,7 @@ export const DiscountsProvider = ({
         currentPage,
         onPageChangeHandler,
         searchDiscountsHandler,
-        filterDiscountsHandler,
+        filterByCategoryHandler,
         filterCategories,
       }}
     >

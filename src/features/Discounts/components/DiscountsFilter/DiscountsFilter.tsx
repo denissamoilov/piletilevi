@@ -5,7 +5,8 @@ import { useCallback, useState } from "react";
 
 export const DiscountsFilters = () => {
   const [search, setSearch] = useState("");
-  const { searchDiscountsHandler, filterCategories } = useDiscounts();
+  const { searchDiscountsHandler, filterCategories, filterByCategoryHandler } =
+    useDiscounts();
 
   const onSearchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -35,11 +36,14 @@ export const DiscountsFilters = () => {
         </div>
         <Select
           options={filterCategories}
+          onValueChange={filterByCategoryHandler}
           placeholder="Applies to"
           className="w-[17.75rem]"
         />
       </div>
-      <Button variant="outline">Search</Button>
+      <Button variant="outline" onClick={onSearchHandler}>
+        Search
+      </Button>
       <Button variant="ghost">Clear all</Button>
     </div>
   );
