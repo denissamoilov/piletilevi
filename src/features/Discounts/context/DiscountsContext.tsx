@@ -43,7 +43,7 @@ export const DiscountsProvider = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [categoryFilter, setCategoryFilter] = useState("");
 
   const { data: discounts = [], refetch } = useQuery<Discount[]>({
     queryFn: fetchDiscounts,
@@ -53,19 +53,13 @@ export const DiscountsProvider = ({
 
   // Filtered discounts
   const filteredDiscounts = discounts.filter((discount) => {
-    const matchSearch = discount.name
+    const matchSearchInput = discount.name
       .toLowerCase()
       .includes(searchInput.toLowerCase());
-    const matchCategory =
+    const matchCategoryFilter =
       discount.category.toLowerCase() === categoryFilter.toLowerCase();
 
-    console.log(
-      "discount.category.toLowerCase() ::",
-      discount.category.toLowerCase()
-    );
-    console.log("matchCategory ::", categoryFilter.toLowerCase());
-
-    return matchSearch && matchCategory;
+    return matchSearchInput && matchCategoryFilter;
   });
 
   // Search
@@ -88,7 +82,7 @@ export const DiscountsProvider = ({
   // Pagination
   const slicedDiscounts = sliceDiscounts(filteredDiscounts, currentPage);
 
-  const totalPages = Math.ceil(discounts.length / PAGE_ITEMS);
+  const totalPages = Math.ceil(filteredDiscounts.length / PAGE_ITEMS);
 
   const nextPageHandler = () => {
     setCurrentPage((prev) => prev + 1);

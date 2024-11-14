@@ -5,10 +5,12 @@ import {
   DiscountsTable,
   DiscountsPagination,
   DiscountsTabs,
+  useDiscounts,
 } from "@/features/Discounts";
 import { Button } from "@/shared/ui/components";
 
 export default function DiscountPage() {
+  const { totalPages } = useDiscounts();
   return (
     <>
       <div className="flex flex-col gap-3">
@@ -27,9 +29,11 @@ export default function DiscountPage() {
         </div>
       </div>
 
-      <div className="shrink-0 flex justify-center items-end mt-4">
-        <DiscountsPagination />
-      </div>
+      {totalPages > 1 && (
+        <div className="shrink-0 flex justify-center items-end mt-4">
+          <DiscountsPagination />
+        </div>
+      )}
     </>
   );
 }
