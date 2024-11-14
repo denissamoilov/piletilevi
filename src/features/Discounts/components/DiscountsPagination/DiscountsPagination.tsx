@@ -7,30 +7,57 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/shared/ui/components";
+import { useDiscounts } from "../../hooks/useDiscounts";
 
 export const DiscountsPagination = () => {
+  const {
+    currentPage,
+    nextPageHandler,
+    prevPageHandler,
+    totalPages,
+    onPageChangeHandler,
+  } = useDiscounts();
+
+  const windowSize = 1;
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationPrevious onClick={prevPageHandler} />
         </PaginationItem>
+        {Array.from({ length: totalPages }, (_, index) => {
+          const pageNumber = index + 1;
+          if (
+            pageNumber === 1 ||
+            pageNumber === totalPages ||
+            (pageNumber >= currentPage - windowSize &&
+              pageNumber <= currentPage + windowSize)
+          ) {
+            return (
+              <PaginationItem key={pageNumber}>
+                <PaginationLink
+                  href="#"
+                  isActive={pageNumber === currentPage}
+                  onClick={() => onPageChangeHandler(pageNumber)}
+                >
+                  {pageNumber}
+                </PaginationLink>
+              </PaginationItem>
+            );
+          } else if (
+            pageNumber === currentPage - windowSize - 1 ||
+            pageNumber === currentPage + windowSize + 1
+          ) {
+            return (
+              <PaginationItem key={pageNumber}>
+                <PaginationEllipsis />
+              </PaginationItem>
+            );
+          }
+        })}
         <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#" isActive>
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext onClick={nextPageHandler} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

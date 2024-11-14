@@ -9,62 +9,7 @@ import {
 } from "@/shared/ui/components/Table/Table";
 import { Pencil } from "@/shared/ui/icons";
 import { useDiscounts } from "../../hooks/useDiscounts";
-const invoices = [
-  {
-    name: "Suvesoodustus",
-    appliesTo: "Event",
-    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
-    discountAmount: "8€",
-  },
-  {
-    name: "Suvesoodustus",
-    appliesTo: "Event",
-    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
-    discountAmount: "8€",
-  },
-  {
-    name: "Suvesoodustus",
-    appliesTo: "Event",
-    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
-    discountAmount: "8€",
-  },
-  {
-    name: "Suvesoodustus",
-    appliesTo: "Event",
-    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
-    discountAmount: "8€",
-  },
-  {
-    name: "Suvesoodustus",
-    appliesTo: "Event",
-    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
-    discountAmount: "8€",
-  },
-  {
-    name: "Suvesoodustus",
-    appliesTo: "Event",
-    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
-    discountAmount: "8€",
-  },
-  {
-    name: "Suvesoodustus",
-    appliesTo: "Event",
-    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
-    discountAmount: "8€",
-  },
-  {
-    name: "Suvesoodustus",
-    appliesTo: "Event",
-    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
-    discountAmount: "8€",
-  },
-  {
-    name: "Suvesoodustus",
-    appliesTo: "Event",
-    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
-    discountAmount: "8€",
-  },
-];
+import { formatDate } from "@/shared/lib/utils";
 
 export const DiscountsTable = () => {
   const { discounts } = useDiscounts();
@@ -84,8 +29,12 @@ export const DiscountsTable = () => {
           <TableRow key={discount.id}>
             <TableCell>{discount.name}</TableCell>
             <TableCell>{discount.category}</TableCell>
-            <TableCell>{`${discount.startDate} - ${discount.endDate}`}</TableCell>
-            <TableCell>{discount.discountAmount}</TableCell>
+            <TableCell>
+              {`${formatDate(discount.startDate)} – ${formatDate(
+                discount.endDate
+              )}`}
+            </TableCell>
+            <TableCell>{`${discount.discountAmount}€`}</TableCell>
             <TableCell>
               <Button
                 variant="white"
