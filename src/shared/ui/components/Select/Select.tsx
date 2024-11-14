@@ -1,6 +1,6 @@
 import React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { ChevronDown } from "../../icons";
+import { Check, ChevronDown } from "../../icons";
 import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/shared/lib/utils";
 
@@ -49,15 +49,23 @@ export const Select: React.FC<SelectProps> = ({
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Content
         position="popper"
-        className="bg-white shadow-lg rounded"
+        className="bg-white shadow-md rounded-sm z-10 mt-2 overflow-hidden w-full min-w-[10rem]"
       >
-        <SelectPrimitive.Viewport className="p-2">
+        <SelectPrimitive.Viewport>
           {options.map(({ value, label }) => (
             <SelectPrimitive.Item
               key={value}
               value={value}
-              className="flex items-center px-4 py-2 hover:bg-gray-100"
+              className={cn(
+                "flex items-center px-2 py-3 text-sm gap-2",
+                "hover:cursor-pointer hover:bg-neutral-100",
+                "before:rounded-sm before:size-5 before:ring-1 before:ring-inset before:ring-primary-100",
+                "data-[state=checked]:bg-primary-200 data-[state=checked]:before:hidden"
+              )}
             >
+              <SelectPrimitive.ItemIndicator className="bg-primary-900 size-5 text-white rounded-sm">
+                <Check />
+              </SelectPrimitive.ItemIndicator>
               <SelectPrimitive.ItemText>{label}</SelectPrimitive.ItemText>
             </SelectPrimitive.Item>
           ))}

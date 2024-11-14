@@ -6,7 +6,7 @@ import { User } from "./components/User/User";
 import { ReactComponent as Logo } from "./images/Logo.svg";
 export const Header = () => {
   return (
-    <div className="h-20 flex items-center justify-between px-10 bg-white shadow-lg sticky top-0 z-10">
+    <div className="h-20 flex items-center justify-between px-10 bg-white shadow-lg sticky top-0 z-20">
       <div className="flex items-center gap-14 h-full">
         <Logo />
         <Navigation />

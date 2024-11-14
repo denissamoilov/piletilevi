@@ -24,6 +24,7 @@ interface InputProps
   className?: string;
   clearable?: boolean;
   onClear?: () => void;
+  appendIcon?: React.ReactNode;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -31,27 +32,33 @@ export const Input: React.FC<InputProps> = ({
   clearable = false,
   onClear,
   splitRight,
+  appendIcon,
   ...props
 }) => {
   return (
-    <div className="relative">
+    <div className="flex items-center relative">
       <input
         className={cn(inputVariants({ splitRight }), className)}
         {...props}
       />
-      {/* {clearable && onClear && props.value ? ( */}
-      <Button
-        className="absolute right-0 top-0"
-        variant="transparent"
-        iconOnly={true}
-        // onClick={() => onClear()}
-        aria-label="Clear input"
-      >
-        <span className="flex items-center justify-center size-full">
-          <Cross />
-        </span>
-      </Button>
-      {/* ) : null} */}
+      {clearable && onClear && props.value ? (
+        <Button
+          className="absolute right-0 top-0"
+          variant="transparent"
+          iconOnly={true}
+          onClick={() => onClear()}
+          aria-label="Clear input"
+        >
+          <span className="flex items-center justify-center size-full">
+            <Cross />
+          </span>
+        </Button>
+      ) : null}
+      {appendIcon && (
+        <div className="size-10 rounded-e flex items-center justify-center border border-primary-100 bg-white border-l-0 text-text-muted">
+          {appendIcon}
+        </div>
+      )}
     </div>
   );
 };

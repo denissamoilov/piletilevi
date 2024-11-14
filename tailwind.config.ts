@@ -24,6 +24,7 @@ export default {
       primary: {
         "50": "#D6DFE5",
         "100": "#D6D2E1",
+        "200": "#EAE9EF",
         "500": "#3C00E5",
         "900": "#19005F",
       },
@@ -41,6 +42,7 @@ export default {
       foreground: "var(--foreground)",
     },
     boxShadow: {
+      md: "0 4px 21px -5px rgba(0,0,0,0.21)",
       lg: "0 4px 20px #D6DFE5",
     },
     extend: {

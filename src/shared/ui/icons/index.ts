@@ -4,5 +4,6 @@ import { ReactComponent as Search } from "./16/Search.svg";
 import { ReactComponent as Pencil } from "./16/Pencil.svg";
 import { ReactComponent as ChevronLeft } from "./16/ChevronLeft.svg";
 import { ReactComponent as ChevronRight } from "./16/ChevronRight.svg";
+import { ReactComponent as Check } from "./20/Check.svg";
 
-export { ChevronDown, ChevronLeft, ChevronRight, Cross, Pencil, Search };
+export { ChevronDown, ChevronLeft, ChevronRight, Check, Cross, Pencil, Search };
