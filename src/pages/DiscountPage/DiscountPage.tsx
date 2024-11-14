@@ -4,6 +4,7 @@ import {
   DiscountsProvider,
   DiscountsFilters,
   DiscountsTable,
+  DiscountsPagination,
 } from "@/features/Discounts";
 import { Button } from "@/shared/ui/components";
 
@@ -24,8 +25,8 @@ export default function DiscountPage() {
         </div>
       </div>
 
-      <div className="shrink-0 flex justify-center items-end">
-        <Button>Create new discount</Button>
+      <div className="shrink-0 flex justify-center items-end mt-4">
+        <DiscountsPagination />
       </div>
     </DiscountsProvider>
   );

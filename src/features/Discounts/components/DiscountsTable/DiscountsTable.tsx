@@ -1,60 +1,66 @@
+import { Button } from "@/shared/ui/components";
 import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/shared/ui/components/Table/Table";
-
+import { Pencil } from "@/shared/ui/icons";
 const invoices = [
   {
-    name: "INV001",
-    appliesTo: "Paid",
-    timePeriod: "$250.00",
+    name: "Suvesoodustus",
+    appliesTo: "Event",
+    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
     discountAmount: "8€",
   },
   {
-    name: "INV002",
-    appliesTo: "Pending",
-    timePeriod: "$150.00",
+    name: "Suvesoodustus",
+    appliesTo: "Event",
+    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
     discountAmount: "8€",
   },
   {
-    name: "INV003",
-    appliesTo: "Unpaid",
-    timePeriod: "$350.00",
+    name: "Suvesoodustus",
+    appliesTo: "Event",
+    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
     discountAmount: "8€",
   },
   {
-    name: "INV004",
-    appliesTo: "Paid",
-    timePeriod: "$450.00",
+    name: "Suvesoodustus",
+    appliesTo: "Event",
+    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
     discountAmount: "8€",
   },
   {
-    name: "INV005",
-    appliesTo: "Paid",
-    timePeriod: "$550.00",
+    name: "Suvesoodustus",
+    appliesTo: "Event",
+    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
     discountAmount: "8€",
   },
   {
-    name: "INV006",
-    appliesTo: "Pending",
-    timePeriod: "$200.00",
+    name: "Suvesoodustus",
+    appliesTo: "Event",
+    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
     discountAmount: "8€",
   },
   {
-    name: "INV007",
-    appliesTo: "Unpaid",
-    timePeriod: "$300.00",
+    name: "Suvesoodustus",
+    appliesTo: "Event",
+    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
     discountAmount: "8€",
   },
   {
-    name: "INV001",
-    appliesTo: "Paid",
-    timePeriod: "$250.00",
+    name: "Suvesoodustus",
+    appliesTo: "Event",
+    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
+    discountAmount: "8€",
+  },
+  {
+    name: "Suvesoodustus",
+    appliesTo: "Event",
+    timePeriod: "13.05.2023 19:00 - 14.05.2023 19:00",
     discountAmount: "8€",
   },
 ];
@@ -64,20 +70,29 @@ export const DiscountsTable = () => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Name</TableHead>
-          <TableHead>Applies to</TableHead>
+          <TableHead className="w-[189px]">Name</TableHead>
+          <TableHead className="w-[151px]">Applies to</TableHead>
           <TableHead>Time period</TableHead>
-          <TableHead className="text-right">Discount amount</TableHead>
+          <TableHead className="w-[138px]">Discount amount</TableHead>
+          <TableHead className="w-12" />
         </TableRow>
       </TableHeader>
       <TableBody>
         {invoices.map((invoice) => (
           <TableRow key={invoice.name}>
-            <TableCell className="font-medium">{invoice.name}</TableCell>
+            <TableCell>{invoice.name}</TableCell>
             <TableCell>{invoice.appliesTo}</TableCell>
             <TableCell>{invoice.timePeriod}</TableCell>
-            <TableCell className="text-right">
-              {invoice.discountAmount}
+            <TableCell>{invoice.discountAmount}</TableCell>
+            <TableCell>
+              <Button
+                variant="white"
+                size="sm"
+                iconOnly={true}
+                aria-label="Edit"
+              >
+                <Pencil />
+              </Button>
             </TableCell>
           </TableRow>
         ))}

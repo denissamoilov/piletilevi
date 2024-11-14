@@ -13,6 +13,7 @@ export default {
       montserrat: ["var(--font-montserrat)"],
     },
     fontSize: {
+      lg: ["1.125rem", { lineHeight: "1.25rem" }], // 18px/20px
       base: ["1rem", { lineHeight: "1.25rem" }], // 16px/20px
       sm: ["0.875rem", { lineHeight: "1rem" }], // 14px/16px
       h1: ["2.25rem", { lineHeight: "2.875rem" }], // 36px/46px
