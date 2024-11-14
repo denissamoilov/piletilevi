@@ -19,7 +19,7 @@ const PaginationContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ul
     ref={ref}
-    className={cn("flex flex-row items-center gap-3", className)}
+    className={cn("flex flex-row items-center gap-4", className)}
     {...props}
   />
 ));
@@ -70,6 +70,7 @@ const PaginationPrevious = ({
         size,
         iconOnly: true,
       }),
+      "mr-2",
       className
     )}
     {...props}
@@ -94,6 +95,7 @@ const PaginationNext = ({
         size,
         iconOnly: true,
       }),
+      "ml-2",
       className
     )}
     {...props}
