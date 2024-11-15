@@ -15,7 +15,6 @@ export async function GET() {
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    console.error("Error fetching discounts:", error);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: {

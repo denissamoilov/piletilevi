@@ -18,6 +18,19 @@ interface DiscountsContextType {
   onSubmitFiltersHandler: (data: DiscountsFiltersSchema) => void;
 }
 
+const initialState: DiscountsContextType = {
+  discounts: [],
+  isLoading: false,
+  fetchDiscounts: () => {},
+  nextPageHandler: () => {},
+  prevPageHandler: () => {},
+  totalPages: 0,
+  currentPage: 1,
+  onPageChangeHandler: () => {},
+  filterCategories: [],
+  onSubmitFiltersHandler: () => {},
+};
+
 const fetchDiscounts = async () => {
   const response = await fetch(`/api/discounts`);
 
@@ -34,9 +47,8 @@ const sliceDiscounts = (discounts: Discount[], currentPage: number) => {
   );
 };
 
-export const DiscountsContext = createContext<DiscountsContextType | undefined>(
-  undefined
-);
+export const DiscountsContext =
+  createContext<DiscountsContextType>(initialState);
 
 export const DiscountsProvider = ({
   children,
