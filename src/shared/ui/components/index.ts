@@ -20,3 +20,13 @@ export {
   TableHead,
 } from "./Table/Table";
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./Tabs/Tabs";
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuLabel,
+  DropdownMenuGroup,
+  DropdownMenuPortal,
+} from "./Dropdown/Dropdown";

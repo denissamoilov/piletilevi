@@ -1,9 +1,10 @@
-import { Button, Input, Select } from "@/shared/ui/components";
+import { Button, Input } from "@/shared/ui/components";
 import { Search } from "@/shared/ui/icons";
 import { useDiscounts } from "../../hooks/useDiscounts";
 import { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { DiscountsFiltersSchema } from "../../types/types";
+import { CategoryDropdown } from "../CategoryDropdown/CategoryDropdown";
 
 export const DiscountsFilters = () => {
   const { filterCategories, onSubmitFiltersHandler } = useDiscounts();
@@ -16,14 +17,14 @@ export const DiscountsFilters = () => {
   } = useForm<DiscountsFiltersSchema>({
     defaultValues: {
       search: "",
-      category: "",
+      categories: [],
     },
   });
 
   const onClearHandler = useCallback(() => {
     reset({
       search: "",
-      category: "",
+      categories: [],
     });
   }, [reset]);
 
@@ -51,14 +52,12 @@ export const DiscountsFilters = () => {
         />
         <Controller
           control={control}
-          name="category"
+          name="categories"
           render={({ field: { onChange, value } }) => (
-            <Select
-              defaultValue={value}
-              options={filterCategories}
-              onValueChange={onChange}
-              placeholder="Applies to"
-              className="w-[17.75rem]"
+            <CategoryDropdown
+              categories={filterCategories}
+              value={value}
+              onChange={onChange}
             />
           )}
         />

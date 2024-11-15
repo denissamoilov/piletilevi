@@ -20,6 +20,8 @@ const buttonVariants = cva(
         white:
           "bg-white border border-primary-100 text-primary-900 hover:bg-primary-light",
         transparent: "bg-transparent border-0",
+        input:
+          "bg-white rounded ring-1 ring-inset ring-primary-100 text-primary gap-2 px-4 py-3 text-sm font-normal normal-case",
       },
       size: {
         md: "h-10 min-w-10",
@@ -42,17 +44,40 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   iconOnly?: boolean;
+  appendIcon?: React.ReactNode;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, iconOnly, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      iconOnly,
+      asChild = false,
+      appendIcon,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, iconOnly, className }))}
+        className={cn(
+          buttonVariants({ variant, size, iconOnly, className }),
+          appendIcon && "gap-2"
+        )}
         ref={ref}
         {...props}
-      />
+      >
+        {children}
+        {appendIcon && (
+          <span className="flex items-center justify-center shrink-0 ml-auto">
+            {appendIcon}
+          </span>
+        )}
+      </Comp>
     );
   }
 );

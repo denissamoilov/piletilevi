@@ -11,7 +11,7 @@ export type Discount = {
 
 const discountsFiltersSchema = z.object({
   search: z.string().optional(),
-  category: z.string().optional(),
+  categories: z.array(z.string()).optional(),
 });
 
 export type DiscountsFiltersSchema = z.infer<typeof discountsFiltersSchema>;

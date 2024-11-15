@@ -12,8 +12,10 @@ import { useDiscounts } from "../../hooks/useDiscounts";
 import { formatDate } from "@/shared/lib/utils";
 
 export const DiscountsTable = () => {
-  const { discounts } = useDiscounts();
-  return (
+  const { discounts, isLoading } = useDiscounts();
+  return isLoading ? (
+    <p>Loading...</p>
+  ) : (
     <Table>
       <TableHeader>
         <TableRow>

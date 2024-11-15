@@ -2,19 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import { createContext, useEffect, useState } from "react";
 import { Discount, DiscountsFiltersSchema } from "../types/types";
 import { PAGE_ITEMS } from "../constants/constants";
-import { OptionType } from "@/shared/types/types";
 
 const DEFAULT_PAGE = 1;
 
 interface DiscountsContextType {
   discounts: Discount[];
+  isLoading: boolean;
   fetchDiscounts: () => void;
   nextPageHandler: () => void;
   prevPageHandler: () => void;
   totalPages: number;
   currentPage: number;
   onPageChangeHandler: (page: number) => void;
-  filterCategories: OptionType[];
+  filterCategories: string[];
   onSubmitFiltersHandler: (data: DiscountsFiltersSchema) => void;
 }
 
@@ -45,7 +45,11 @@ export const DiscountsProvider = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE);
 
-  const { data: discounts = [], refetch } = useQuery<Discount[]>({
+  const {
+    data: discounts = [],
+    refetch,
+    isLoading,
+  } = useQuery<Discount[]>({
     queryFn: fetchDiscounts,
     queryKey: ["discounts"],
     initialData: [],
@@ -58,28 +62,23 @@ export const DiscountsProvider = ({
     setFilteredDiscounts(discounts);
   }, [discounts]);
 
-  console.log("filteredDiscounts :: ", filteredDiscounts);
-
   // Filter categories
-  const filterCategories = discounts.reduce((acc: OptionType[], discount) => {
-    if (!acc.find((category) => category.value === discount.category)) {
-      acc.push({ label: discount.category, value: discount.category });
+  const filterCategories = discounts.reduce((acc: string[], discount) => {
+    if (!acc.find((category) => category === discount.category)) {
+      acc.push(discount.category);
     }
     return acc;
   }, []);
 
   // Filtered discounts
   const onSubmitFiltersHandler = (data: DiscountsFiltersSchema) => {
-    console.log("data :: ", data);
-
     const filteredDiscounts = discounts.filter((discount) => {
       const matchSearchInput = data.search
         ? discount.name.toLowerCase().includes(data.search.toLowerCase())
-        : true; // If no search input, consider it a match
-
-      const matchCategoryFilter = data.category
-        ? discount.category.toLowerCase() === data.category.toLowerCase()
-        : true; // If no category selected, consider it a match
+        : true;
+      const matchCategoryFilter = data.categories?.length
+        ? data.categories.includes(discount.category)
+        : true;
 
       return matchSearchInput && matchCategoryFilter;
     });
@@ -108,6 +107,7 @@ export const DiscountsProvider = ({
     <DiscountsContext.Provider
       value={{
         discounts: slicedDiscounts,
+        isLoading,
         fetchDiscounts: refetch,
         nextPageHandler,
         prevPageHandler,
