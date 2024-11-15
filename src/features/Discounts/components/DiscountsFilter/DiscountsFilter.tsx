@@ -3,18 +3,10 @@ import { Search } from "@/shared/ui/icons";
 import { useDiscounts } from "../../hooks/useDiscounts";
 import { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
-
-import { z } from "zod";
-
-export const discountsFiltersSchema = z.object({
-  search: z.string().optional(),
-  category: z.string().optional(),
-});
-
-export type DiscountsFiltersSchema = z.infer<typeof discountsFiltersSchema>;
+import { DiscountsFiltersSchema } from "../../types/types";
 
 export const DiscountsFilters = () => {
-  const { filterCategories } = useDiscounts();
+  const { filterCategories, onSubmitFiltersHandler } = useDiscounts();
 
   const {
     handleSubmit,
@@ -36,7 +28,7 @@ export const DiscountsFilters = () => {
   }, [reset]);
 
   const onSubmit = (data: DiscountsFiltersSchema) => {
-    console.log(data);
+    onSubmitFiltersHandler(data);
   };
 
   return (

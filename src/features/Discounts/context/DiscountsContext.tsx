@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { createContext, useState } from "react";
-import { Discount } from "../types/types";
+import { createContext, useEffect, useState } from "react";
+import { Discount, DiscountsFiltersSchema } from "../types/types";
 import { PAGE_ITEMS } from "../constants/constants";
 import { OptionType } from "@/shared/types/types";
+
+const DEFAULT_PAGE = 1;
+
 interface DiscountsContextType {
   discounts: Discount[];
   fetchDiscounts: () => void;
@@ -11,10 +14,8 @@ interface DiscountsContextType {
   totalPages: number;
   currentPage: number;
   onPageChangeHandler: (page: number) => void;
-  // searchDiscountsHandler: (search: string) => void;
-  filterByCategoryHandler: (value: string) => void;
   filterCategories: OptionType[];
-  onSubmitFiltersHandler: (search: string) => void;
+  onSubmitFiltersHandler: (data: DiscountsFiltersSchema) => void;
 }
 
 const fetchDiscounts = async () => {
@@ -42,18 +43,22 @@ export const DiscountsProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchInput, setSearchInput] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState<string | undefined>(
-    undefined
-  );
-  const [filteredDiscounts, setFilteredDiscounts] = useState<Discount[]>([]);
+  const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE);
 
   const { data: discounts = [], refetch } = useQuery<Discount[]>({
     queryFn: fetchDiscounts,
     queryKey: ["discounts"],
     initialData: [],
   });
+
+  const [filteredDiscounts, setFilteredDiscounts] =
+    useState<Discount[]>(discounts);
+
+  useEffect(() => {
+    setFilteredDiscounts(discounts);
+  }, [discounts]);
+
+  console.log("filteredDiscounts :: ", filteredDiscounts);
 
   // Filter categories
   const filterCategories = discounts.reduce((acc: OptionType[], discount) => {
@@ -63,36 +68,23 @@ export const DiscountsProvider = ({
     return acc;
   }, []);
 
-  // setFilteredDiscounts(discounts);
-
   // Filtered discounts
-  const onSubmitFiltersHandler = (search: string) => {
-    setSearchInput(search);
-    if (categoryFilter || searchInput !== "") {
-      const filteredDiscounts = discounts.filter((discount) => {
-        const matchSearchInput = discount.name
-          .toLowerCase()
-          .includes(searchInput.toLowerCase());
-        const matchCategoryFilter =
-          categoryFilter &&
-          discount.category.toLowerCase() === categoryFilter.toLowerCase();
+  const onSubmitFiltersHandler = (data: DiscountsFiltersSchema) => {
+    console.log("data :: ", data);
 
-        console.log("matchSearchInput", matchSearchInput);
-        console.log("matchCategoryFilter", matchCategoryFilter);
+    const filteredDiscounts = discounts.filter((discount) => {
+      const matchSearchInput = data.search
+        ? discount.name.toLowerCase().includes(data.search.toLowerCase())
+        : true; // If no search input, consider it a match
 
-        return matchSearchInput && matchCategoryFilter;
-      });
-      setFilteredDiscounts(filteredDiscounts);
-    }
-  };
+      const matchCategoryFilter = data.category
+        ? discount.category.toLowerCase() === data.category.toLowerCase()
+        : true; // If no category selected, consider it a match
 
-  // Search
-  // const searchDiscountsHandler = (search: string) => {
-  //   setSearchInput(search);
-  // };
+      return matchSearchInput && matchCategoryFilter;
+    });
 
-  const filterByCategoryHandler = (category: string) => {
-    setCategoryFilter(category);
+    setFilteredDiscounts(filteredDiscounts);
   };
 
   // Pagination
@@ -101,11 +93,11 @@ export const DiscountsProvider = ({
   const totalPages = Math.ceil(filteredDiscounts.length / PAGE_ITEMS);
 
   const nextPageHandler = () => {
-    setCurrentPage((prev) => prev + 1);
+    setCurrentPage((prev) => (prev !== totalPages ? prev + 1 : prev));
   };
 
   const prevPageHandler = () => {
-    setCurrentPage((prev) => prev - 1);
+    setCurrentPage((prev) => (prev !== 1 ? prev - 1 : prev));
   };
 
   const onPageChangeHandler = (page: number) => {
@@ -122,8 +114,6 @@ export const DiscountsProvider = ({
         totalPages,
         currentPage,
         onPageChangeHandler,
-        // searchDiscountsHandler,
-        filterByCategoryHandler,
         filterCategories,
         onSubmitFiltersHandler,
       }}

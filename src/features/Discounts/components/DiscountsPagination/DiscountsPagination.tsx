@@ -24,7 +24,10 @@ export const DiscountsPagination = () => {
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious onClick={prevPageHandler} />
+          <PaginationPrevious
+            onClick={prevPageHandler}
+            disabled={currentPage === 1}
+          />
         </PaginationItem>
         {Array.from({ length: totalPages }, (_, index) => {
           const pageNumber = index + 1;
@@ -57,7 +60,10 @@ export const DiscountsPagination = () => {
           }
         })}
         <PaginationItem>
-          <PaginationNext onClick={nextPageHandler} />
+          <PaginationNext
+            onClick={nextPageHandler}
+            disabled={currentPage === totalPages}
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
