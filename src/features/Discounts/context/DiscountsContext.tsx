@@ -11,9 +11,10 @@ interface DiscountsContextType {
   totalPages: number;
   currentPage: number;
   onPageChangeHandler: (page: number) => void;
-  searchDiscountsHandler: (search: string) => void;
+  // searchDiscountsHandler: (search: string) => void;
   filterByCategoryHandler: (value: string) => void;
   filterCategories: OptionType[];
+  onSubmitFiltersHandler: (search: string) => void;
 }
 
 const fetchDiscounts = async () => {
@@ -43,29 +44,16 @@ export const DiscountsProvider = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState<string | undefined>(
+    undefined
+  );
+  const [filteredDiscounts, setFilteredDiscounts] = useState<Discount[]>([]);
 
   const { data: discounts = [], refetch } = useQuery<Discount[]>({
     queryFn: fetchDiscounts,
     queryKey: ["discounts"],
     initialData: [],
   });
-
-  // Filtered discounts
-  const filteredDiscounts = discounts.filter((discount) => {
-    const matchSearchInput = discount.name
-      .toLowerCase()
-      .includes(searchInput.toLowerCase());
-    const matchCategoryFilter =
-      discount.category.toLowerCase() === categoryFilter.toLowerCase();
-
-    return matchSearchInput && matchCategoryFilter;
-  });
-
-  // Search
-  const searchDiscountsHandler = (search: string) => {
-    setSearchInput(search);
-  };
 
   // Filter categories
   const filterCategories = discounts.reduce((acc: OptionType[], discount) => {
@@ -74,6 +62,34 @@ export const DiscountsProvider = ({
     }
     return acc;
   }, []);
+
+  // setFilteredDiscounts(discounts);
+
+  // Filtered discounts
+  const onSubmitFiltersHandler = (search: string) => {
+    setSearchInput(search);
+    if (categoryFilter || searchInput !== "") {
+      const filteredDiscounts = discounts.filter((discount) => {
+        const matchSearchInput = discount.name
+          .toLowerCase()
+          .includes(searchInput.toLowerCase());
+        const matchCategoryFilter =
+          categoryFilter &&
+          discount.category.toLowerCase() === categoryFilter.toLowerCase();
+
+        console.log("matchSearchInput", matchSearchInput);
+        console.log("matchCategoryFilter", matchCategoryFilter);
+
+        return matchSearchInput && matchCategoryFilter;
+      });
+      setFilteredDiscounts(filteredDiscounts);
+    }
+  };
+
+  // Search
+  // const searchDiscountsHandler = (search: string) => {
+  //   setSearchInput(search);
+  // };
 
   const filterByCategoryHandler = (category: string) => {
     setCategoryFilter(category);
@@ -106,9 +122,10 @@ export const DiscountsProvider = ({
         totalPages,
         currentPage,
         onPageChangeHandler,
-        searchDiscountsHandler,
+        // searchDiscountsHandler,
         filterByCategoryHandler,
         filterCategories,
+        onSubmitFiltersHandler,
       }}
     >
       {children}
