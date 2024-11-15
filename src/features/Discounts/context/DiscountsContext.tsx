@@ -60,7 +60,6 @@ export const DiscountsProvider = ({
   const {
     data: discounts = [],
     refetch,
-    isLoading,
     isFetching,
   } = useQuery<Discount[]>({
     queryFn: fetchDiscounts,
