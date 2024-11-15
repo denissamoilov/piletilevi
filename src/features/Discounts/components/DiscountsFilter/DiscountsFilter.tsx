@@ -7,7 +7,8 @@ import { DiscountsFiltersSchema } from "../../types/types";
 import { CategoryDropdown } from "../CategoryDropdown/CategoryDropdown";
 
 export const DiscountsFilters = () => {
-  const { filterCategories, onSubmitFiltersHandler } = useDiscounts();
+  const { filterCategories, onSubmitFiltersHandler, isFetching } =
+    useDiscounts();
 
   const {
     handleSubmit,
@@ -47,6 +48,7 @@ export const DiscountsFilters = () => {
               clearable={true}
               onClear={() => field.onChange("")}
               appendIcon={<Search />}
+              disabled={isFetching}
             />
           )}
         />
@@ -59,14 +61,19 @@ export const DiscountsFilters = () => {
               value={value}
               onChange={onChange}
               className="w-[17.75rem]"
+              // disabled={isFetching}
             />
           )}
         />
       </div>
-      <Button variant="outline" disabled={isSubmitting}>
+      <Button variant="outline" disabled={isSubmitting || isFetching}>
         Search
       </Button>
-      <Button variant="ghost" onClick={onClearHandler}>
+      <Button
+        variant="ghost"
+        onClick={onClearHandler}
+        disabled={isFetching || isSubmitting}
+      >
         Clear all
       </Button>
     </form>

@@ -12,8 +12,9 @@ import { useDiscounts } from "../../hooks/useDiscounts";
 import { formatDate } from "@/shared/lib/utils";
 
 export const DiscountsTable = () => {
-  const { discounts, isLoading } = useDiscounts();
-  return isLoading ? (
+  const { discounts, isFetching } = useDiscounts();
+  console.log("isLoading ::", isFetching);
+  return isFetching ? (
     <p>Loading...</p>
   ) : (
     <Table>

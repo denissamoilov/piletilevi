@@ -7,7 +7,7 @@ const DEFAULT_PAGE = 1;
 
 interface DiscountsContextType {
   discounts: Discount[];
-  isLoading: boolean;
+  isFetching: boolean;
   fetchDiscounts: () => void;
   nextPageHandler: () => void;
   prevPageHandler: () => void;
@@ -20,7 +20,7 @@ interface DiscountsContextType {
 
 const initialState: DiscountsContextType = {
   discounts: [],
-  isLoading: false,
+  isFetching: false,
   fetchDiscounts: () => {},
   nextPageHandler: () => {},
   prevPageHandler: () => {},
@@ -61,6 +61,7 @@ export const DiscountsProvider = ({
     data: discounts = [],
     refetch,
     isLoading,
+    isFetching,
   } = useQuery<Discount[]>({
     queryFn: fetchDiscounts,
     queryKey: ["discounts"],
@@ -119,7 +120,7 @@ export const DiscountsProvider = ({
     <DiscountsContext.Provider
       value={{
         discounts: slicedDiscounts,
-        isLoading,
+        isFetching,
         fetchDiscounts: refetch,
         nextPageHandler,
         prevPageHandler,
