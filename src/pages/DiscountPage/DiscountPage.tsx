@@ -6,17 +6,18 @@ import {
   DiscountsPagination,
   DiscountsTabs,
   useDiscounts,
+  CreateDiscountDialog,
 } from "@/features/Discounts";
-import { Button } from "@/shared/ui/components";
 
 export default function DiscountPage() {
   const { totalPages } = useDiscounts();
+
   return (
     <>
       <div className="flex flex-col gap-3">
         <div className="flex items-start justify-between">
           <h1>Discounts</h1>
-          <Button>Create new discount</Button>
+          <CreateDiscountDialog />
         </div>
         <DiscountsFilters />
       </div>

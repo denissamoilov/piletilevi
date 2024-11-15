@@ -58,6 +58,7 @@ export const DiscountsFilters = () => {
               categories={filterCategories}
               value={value}
               onChange={onChange}
+              className="w-[17.75rem]"
             />
           )}
         />

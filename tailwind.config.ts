@@ -18,6 +18,7 @@ export default {
       sm: ["0.875rem", { lineHeight: "1rem" }], // 14px/16px
       h1: ["2.25rem", { lineHeight: "2.875rem" }], // 36px/46px
       h2: ["1.75rem", { lineHeight: "2rem" }], // 28px/32px
+      xl: ["1.75rem", { lineHeight: "2rem" }], // 28px/32px
     },
     colors: {
       white: "#FFFFFF",
@@ -29,6 +30,7 @@ export default {
         "900": "#19005F",
       },
       text: {
+        title: "#212A4F",
         base: "#1A1A1A",
         disabled: "#9A9A9A",
         muted: "#626262",

@@ -11,10 +11,12 @@ export const CategoryDropdown = ({
   categories,
   value = [],
   onChange,
+  className,
 }: {
   categories: string[];
   value?: string[];
   onChange: (categories: string[]) => void;
+  className?: string;
 }) => {
   const onChangeHandler = (category: string, isChecked: boolean) => {
     const updatedCategories = isChecked
@@ -28,13 +30,13 @@ export const CategoryDropdown = ({
       <DropdownMenuTrigger asChild>
         <Button
           variant="input"
-          className="w-[17.75rem]"
+          className={className}
           appendIcon={<ChevronDown className="text-primary-500" />}
         >
           {value.length ? value.join(", ") : "Applies to"}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-56" align="start">
         {categories.map((category) => (
           <DropdownMenuCheckboxItem
             key={category}
